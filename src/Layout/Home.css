@@ -1,0 +1,30 @@
+button {
+  color: white;
+  border: none;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 10px;
+  border-width: 0em;
+  background-color: #282c34;
+  outline: none;
+  margin-right: 5px;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+button:active {
+  background-color: grey;
+  border: none;
+  outline: none;
+}
+
+textarea {
+  resize: none;
+  height: 150px;
+}
+
+input, textarea {
+  width: 100%;
+}
