@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { deleteCard } from "../utils/api/index";
 
-function Card({ card }) {
+function Card({ card, update, setUpdate }) {
   async function handleDelete() {
     if (
       window.confirm(
@@ -10,6 +10,7 @@ function Card({ card }) {
       )
     ) {
       await deleteCard(card.id);
+      setUpdate(!update);
     }
   }
 

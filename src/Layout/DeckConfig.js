@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import Nav from "./Nav";
 import { updateDeck, createDeck, readDeck } from "../utils/api/index";
 
 function DeckConfig() {
   const parameters = useParams();
+  const navigate = useNavigate();
   const isNew = useLocation().pathname.includes("new");
   const initialFormState = {
     name: "",
@@ -25,6 +26,8 @@ function DeckConfig() {
     } else {
       await updateDeck(formData);
     }
+
+    navigate("/");    
   }
 
   useEffect(() => {

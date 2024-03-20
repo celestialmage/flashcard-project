@@ -6,6 +6,7 @@ import "./Home.css";
 
 function Home() {
   const [decks, setDecks] = useState([]);
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
     setDecks([]);
@@ -29,7 +30,7 @@ function Home() {
     return () => {
       abortController.abort();
     };
-  }, []);
+  }, [update]);
 
   return (
     <>
@@ -37,7 +38,12 @@ function Home() {
         <button> + Create Deck </button>
       </Link>
 
-      <DeckList decks={decks} setDecks={setDecks} />
+      <DeckList
+        decks={decks}
+        update={update}
+        setUpdate={setUpdate}
+        setDecks={setDecks}
+      />
     </>
   );
 }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { deleteDeck } from "../utils/api/index";
 import "./Deck.css";
 
-function Deck({ deck }) {
+function Deck({ deck, update, setUpdate }) {
   async function handleDelete() {
     if (
       window.confirm(
@@ -11,6 +11,7 @@ function Deck({ deck }) {
       )
     ) {
       await deleteDeck(deck.id);
+      setUpdate(!update);
     }
   }
 

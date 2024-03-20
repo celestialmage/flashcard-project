@@ -1,9 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteDeck } from "../utils/api/index";
 import CardList from "./CardList";
 
-function DeckProfile({ deck }) {
+function DeckProfile({ deck, update, setUpdate }) {
+
+  const navigate = useNavigate();
+
   async function handleDelete() {
     if (
       window.confirm(
@@ -11,6 +14,7 @@ function DeckProfile({ deck }) {
       )
     ) {
       await deleteDeck(deck.id);
+      navigate("/");
     }
   }
 
@@ -32,7 +36,7 @@ function DeckProfile({ deck }) {
       </div>
       <div>
         <h2>Cards</h2>
-        <CardList cards={deck.cards} />
+        <CardList cards={deck.cards} update={update} setUpdate={setUpdate} />
       </div>
     </>
   );

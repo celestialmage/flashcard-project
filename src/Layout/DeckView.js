@@ -11,6 +11,7 @@ import "./DeckView.css";
 function DeckView() {
   const parameters = useParams();
   const [deck, setDeck] = useState({});
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
     setDeck({});
@@ -30,17 +31,23 @@ function DeckView() {
     }
 
     loadDeck();
+    console.log(update);
 
     return () => {
       abortController.abort();
     };
-  }, []);
+  }, [update]);
 
   return (
     <>
       <Nav deck={deck} />
       <Routes>
-        <Route path="/" element={<DeckProfile deck={deck} />} />
+        <Route
+          path="/"
+          element={
+            <DeckProfile deck={deck} update={update} setUpdate={setUpdate} />
+          }
+        />
         <Route path="study" element={<DeckStudy deck={deck} />} />
         <Route
           path="/edit"
@@ -48,8 +55,14 @@ function DeckView() {
             <DeckConfig name={deck.name} description={deck.description} />
           }
         />
-        <Route path="cards/:cardId/edit/*" element={<CardConfig />} />
-        <Route path="cards/new" element={<CardConfig />} />
+        <Route
+          path="cards/:cardId/edit/*"
+          element={<CardConfig update={update} setUpdate={setUpdate} />}
+        />
+        <Route
+          path="cards/new"
+          element={<CardConfig update={update} setUpdate={setUpdate} />}
+        />
       </Routes>
     </>
   );

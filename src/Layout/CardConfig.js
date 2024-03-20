@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useLocation, Link } from "react-router-dom";
+import { useParams, useLocation, useNavigate, Link } from "react-router-dom";
 import { readCard, createCard, updateCard } from "../utils/api/index";
 
-function CardConfig() {
+function CardConfig({ update, setUpdate }) {
   const parameters = useParams();
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   const isNew = pathname.includes("new");
   const initialFormState = {
@@ -36,6 +37,9 @@ function CardConfig() {
 
     uploadCard(formData, isNew);
 
+    setUpdate(!update);
+
+    navigate(`/decks/${parameters.deckId}`);
     // console.log(formData);
   }
 
